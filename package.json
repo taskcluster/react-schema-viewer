@@ -1,0 +1,34 @@
+{
+  "name": "react-jsonschema-doc",
+  "version": "1.0.0",
+  "description": "react jsonschema documentation builder",
+  "license": "MPL-2.0",
+  "scripts": {
+    "build": "neutrino build",
+    "start": "neutrino start",
+    "test": "neutrino build"
+  },
+  "main": "lib/JSONSchemaDoc.js",
+  "files": [
+    "lib",
+    "src/components"
+  ],
+  "keywords": [
+    "json",
+    "schema",
+    "jsonschema"
+  ],
+  "dependencies": {
+    "prop-types": "^15.5.10",
+    "react-hot-loader": "3.0.0-beta.7",
+    "react-markdown": "^2.5.0",
+    "source-map-support": "^0.4.16"
+  },
+  "devDependencies": {
+    "neutrino": "^6.1.5",
+    "neutrino-preset-react-components": "^2.1.1",
+    "react": "^15.6.1",
+    "react-addons-css-transition-group": "^15.6.0",
+    "react-dom": "^15.6.1"
+  }
+}

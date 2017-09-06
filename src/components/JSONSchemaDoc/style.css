@@ -1,0 +1,110 @@
+.panel {
+  border: 1px solid rgb(221, 221, 221);
+  color: #222;
+}
+
+.panelHeading {
+  background-color: #eee;
+  padding: 1em;
+}
+
+.panelHeading a {
+  font-size: 0.7em;
+}
+
+.topTable {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.topTable table {
+  border-bottom: 1px solid rgb(221, 221, 221);
+  border-top: 1px solid rgb(221, 221, 221);
+  border-left: 1px solid rgb(221, 221, 221);
+  width: 100%;
+}
+
+tr td:nth-child(1) {
+  width: 15%;
+}
+
+tr td:nth-child(2) {
+  width: 10%;
+}
+
+tr td:nth-child(3) {
+  width: 13%;
+}
+
+tr td:nth-child(4) {
+  font-family: Sans-Serif;
+}
+
+tr {
+  border-top: 1px solid rgb(221, 221, 221);
+}
+
+td {
+  padding: 0.2em;
+}
+
+.joined > tr:first-child {
+  border-bottom: none;
+}
+
+.joined > tr:last-child {
+  border-top: none;
+}
+
+.joined > :last-child td {
+  padding-left: 2em;
+}
+
+.required:after {
+  content: '*';
+  color: red;
+  vertical-align: super;
+  font-size: 0.7em;
+  display: inline-block;
+  position: absolute;
+}
+
+.required .required:hover:after {
+  content: 'required property';
+  background: #fff;
+  font-size: 0.8em;
+}
+
+code {
+  color: #c7254e;
+  background-color: #f9f2f4;
+}
+
+.short {
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 8em;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+
+.short:hover {
+  width: initial;
+  white-space: normal;
+  max-width: 40em;
+  max-height: initial;
+  border: 1px solid #444;
+  margin-top: -1em;
+  margin-left: -1px;
+  position: absolute;
+}
+
+.formats {
+  list-style: none;
+}
+
+.formats .short:hover {
+  position: relative;
+}
