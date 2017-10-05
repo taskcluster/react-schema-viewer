@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Stories, Story, Props } from 'neutrino-preset-react-components/lib';
-import JSONSchemaDoc from './components/JSONSchemaDoc';
+import JSONSchemaTable from './components/JSONSchemaTable';
 
 const root = document.getElementById('root');
 
@@ -16,7 +16,7 @@ const load = async () => {
   render((
     <AppContainer>
       <Stories>
-        <Story component={JSONSchemaDoc}>
+        <Story component={JSONSchemaTable}>
           <Props name="Get Client Response" schema={await getClientResponse.json()}/>
           <Props name="Task Definition" schema={await taskDef.json()}/>
           <Props name="Notify Request" schema={await notify.json()}/>
@@ -27,10 +27,10 @@ const load = async () => {
       </Stories>
     </AppContainer>
   ), root);
-}
+};
 
 if (module.hot) {
-  module.hot.accept('./components/JSONSchemaDoc', load);
+  module.hot.accept('./components/JSONSchemaTable', load);
 }
 
 load();

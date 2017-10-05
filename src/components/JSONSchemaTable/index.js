@@ -3,7 +3,7 @@ import styles from './style.css';
 import ReactMarkdown from 'react-markdown';
 import NormalRow from './NormalRow';
 
-export default class JSONSchemDoc extends React.Component {
+export default class JSONSchemaTable extends React.PureComponent {
   constructor(props) {
     super(props);
   }
