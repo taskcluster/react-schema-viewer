@@ -4,7 +4,6 @@ import styles from './styles.css';
 
 const PATTERN_MAX = 15;
 const Pattern = ({ pattern }) => {
-  console.log('pattern: ', pattern);
   if (!(pattern.length > PATTERN_MAX)) {
     return <code>{pattern}</code>
   }

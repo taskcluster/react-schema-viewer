@@ -1,15 +1,15 @@
 import React from 'react';
-import styles from './style.css';
-import ReactMarkdown from 'react-markdown';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Table } from 'react-bootstrap';
+import { object } from 'prop-types';
+import Markdown from '../../widgets/Markdown';
 import NormalRow from './NormalRow';
+import styles from './styles.css';
 
 export default class JSONSchemaTable extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   objectTable(schema, name, reqSet, key) {
     let res = [];
+
     if (schema.properties) {
       res = Object.entries(schema.properties).map(([name, prop]) => {
         return this.schemaTable(prop, name, reqSet, `${key}-${name}`);
@@ -43,9 +43,9 @@ export default class JSONSchemaTable extends React.PureComponent {
         <NormalRow schema={schema} name={name} type='Object of' reqSet={reqSet}/>
         <tr>
           <td colSpan={4}>
-            <table>
+            <Table responsive>
               {res}
-            </table>
+            </Table>
           </td>
         </tr>
       </tbody>
@@ -58,11 +58,11 @@ export default class JSONSchemaTable extends React.PureComponent {
         <NormalRow schema={schema} name={name} type={type}/>
         <tr>
           <td colSpan={4}>
-            <table>
+            <Table>
               {things.map((thing, i) => {
                 return this.schemaTable(thing, thing.title, null, `${key}-${i}`);
               })}
-            </table>
+            </Table>
           </td>
         </tr>
       </tbody>
@@ -72,6 +72,7 @@ export default class JSONSchemaTable extends React.PureComponent {
   schemaTable(schema, name, reqSet, key) {
     reqSet = new Set(schema.required || reqSet || []);
     key = `${key}-${name}`;
+
     if (schema.anyOf) {
       return this.combination(schema, schema.anyOf, name, 'Any of', key);
     } else if (schema.allOf) {
@@ -79,6 +80,7 @@ export default class JSONSchemaTable extends React.PureComponent {
     } else if (schema.oneOf) {
       return this.combination(schema, schema.oneOf, name, 'One of', key);
     }
+
     switch (schema.type) {
       case 'object': return this.objectTable(schema, name, reqSet, key);
       case 'array': return (
@@ -86,14 +88,14 @@ export default class JSONSchemaTable extends React.PureComponent {
           <NormalRow schema={schema} name={name} type='Array of' reqSet={reqSet}/>
           <tr>
             <td colSpan={4}>
-              <table>
+              <Table condensed responsive>
                 {this.schemaTable(
                   schema.items,
                   schema.items.title,
                   reqSet,
                   `${key}-${schema.items.title}`
                 )}
-              </table>
+              </Table>
             </td>
           </tr>
         </tbody>
@@ -106,25 +108,37 @@ export default class JSONSchemaTable extends React.PureComponent {
     }
   }
 
+  renderHeader() {
+    const { schema } = this.props;
+
+    return (
+      <div className={styles.panelHeading}>
+        <h3>
+          {schema.title}&nbsp;{schema.id && (
+          <a href={schema.id} target='_blank' rel='noopener noreferrer'>
+            (source)
+          </a>
+        )}
+        </h3>
+        <Markdown>{schema.description}</Markdown>
+      </div>
+    )
+  }
+
   render() {
-    const {schema} = this.props;
+    const { schema } = this.props;
+
     return (
       <div className={styles.panel}>
-        <div className={styles.panelHeading}>
-          <h4>
-            {schema.title}&nbsp;
-            {schema.id && (
-              <a href={schema.id} target='_blank' rel='noopener noreferrer'>
-                (source)
-              </a>
-            )}
-          </h4>
-          <ReactMarkdown source={schema.description || ''}/>
-        </div>
-        <table className={styles.topTable}>
+        {this.renderHeader()}
+        <Table condensed responsive className={styles.topTable}>
           {this.schemaTable(schema, null, null, schema.id)}
-        </table>
+        </Table>
       </div>
     );
   }
 }
+
+JSONSchemaTable.propTypes = {
+  schema: object.isRequired
+};
