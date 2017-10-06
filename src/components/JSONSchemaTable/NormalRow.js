@@ -1,8 +1,9 @@
 import React from 'react';
-import styles from './style.css';
-import ReactMarkdown from 'react-markdown';
+import styles from './styles.css';
+import Markdown from '../../widgets/Markdown';
+import CodeTooltip from '../../widgets/CodeTooltip';
 
-export default class NormalRow extends React.Component {
+export default class NormalRow extends React.PureComponent {
   constructor(props) {
     super(props);
   }
@@ -17,7 +18,9 @@ export default class NormalRow extends React.Component {
 
   formatField(schema) {
     if (schema.pattern) {
-      return (<code className={styles.short}>{schema.pattern}</code>);
+      return (
+        <CodeTooltip pattern={schema.pattern} />
+      );
     } else if (schema.format) {
       return (<span>{schema.format}</span>);
     } else if (schema.enum) {
@@ -25,7 +28,7 @@ export default class NormalRow extends React.Component {
         <ul className={styles.formats}>
           {schema.enum.map(val => (
             <li key={`${schema.id}-${val}`}>
-              <code className={styles.short}>{val}</code>
+              <CodeTooltip pattern={val} />
             </li>
           ))}
         </ul>
@@ -36,10 +39,11 @@ export default class NormalRow extends React.Component {
   render() {
     const {schema, name, type, reqSet} = this.props;
     const required = reqSet && reqSet.has(name);
+
     return (
       <tr>
         <td>
-          <span className={required && styles.required}>{name}</span>
+          <span>{name}<span className={styles.required}>{required && '*'}</span></span>
         </td>
         <td>
           {type || schema.type}{this.limits(schema)}
@@ -50,7 +54,7 @@ export default class NormalRow extends React.Component {
           {this.formatField(schema)}
         </td>
         <td>
-          <ReactMarkdown source={schema.description || ''}/>
+          <Markdown>{schema.description}</Markdown>
         </td>
       </tr>
     );

@@ -4,7 +4,6 @@ import markdown from 'markdown-it';
 
 export default class Markdown extends React.PureComponent {
   render() {
-    console.log('markdown().render(this.props.children): ', markdown().render(this.props.children));
     return (
       <span
         dangerouslySetInnerHTML={{
