@@ -9,7 +9,8 @@
 React JSON Schema Viewer takes a JSON Schema as input and uses it to generate comprehensible views.
 It has full support for JSON Schema version 3 and 4.
 
-## <JSONSchemaTable />
+## JSONSchemaTable
+
 ### Usage
 
 After importing the component, it can be rendered with the required `schema` prop:
