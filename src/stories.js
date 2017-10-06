@@ -3,34 +3,46 @@ import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Stories, Story, Props } from 'neutrino-preset-react-components/lib';
 import JSONSchemaTable from './components/JSONSchemaTable';
+import JSONSchemaTableNew from './components/JSONSchemaTableNew';
 
 const root = document.getElementById('root');
 
 const load = async () => {
-  const getClientResponse = await fetch("http://schemas.taskcluster.net/auth/v1/get-client-response.json#");
-  const taskDef = await fetch("http://schemas.taskcluster.net/queue/v1/task.json#");
-  const notify = await fetch("http://schemas.taskcluster.net/notify/v1/email-request.json#");
-  const index = await fetch("http://schemas.taskcluster.net/index/v1/indexed-task-response.json#");
-  const oneOf = await fetch("http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#");
-  const otherProps = await fetch("http://schemas.taskcluster.net/queue/v1/provisioner-response.json#");
-  render((
-    <AppContainer>
-      <Stories>
-        <Story component={JSONSchemaTable}>
-          <Props name="Get Client Response" schema={await getClientResponse.json()}/>
-          <Props name="Task Definition" schema={await taskDef.json()}/>
-          <Props name="Notify Request" schema={await notify.json()}/>
-          <Props name="Index Response" schema={await index.json()}/>
-          <Props name="One of" schema={await oneOf.json()}/>
-          <Props name="Extra Properties" schema={await otherProps.json()}/>
-        </Story>
-      </Stories>
-    </AppContainer>
-  ), root);
+  const getClientResponse = await (await fetch('http://schemas.taskcluster.net/auth/v1/get-client-response.json#')).json();
+  const taskDef = await (await fetch('http://schemas.taskcluster.net/queue/v1/task.json#')).json();
+  const notify = await (await fetch('http://schemas.taskcluster.net/notify/v1/email-request.json#')).json();
+  const index = await (await fetch('http://schemas.taskcluster.net/index/v1/indexed-task-response.json#')).json();
+  const oneOf = await (await fetch('http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#')).json();
+  const otherProps = await (await fetch('http://schemas.taskcluster.net/queue/v1/provisioner-response.json#')).json();
+
+  render(
+    (
+      <AppContainer>
+        <Stories>
+          <Story component={JSONSchemaTableNew} >
+            <Props name="Get Client Response" schema={getClientResponse} />
+            <Props name="Task Definition" schema={taskDef} />
+            <Props name="Notify Request" schema={notify} />
+            <Props name="Index Response" schema={index} />
+            <Props name="One of" schema={oneOf} />
+            <Props name="Extra Properties" schema={otherProps} />
+          </Story>
+          <Story component={JSONSchemaTable} >
+            <Props name="Get Client Response" schema={getClientResponse} />
+            <Props name="Task Definition" schema={taskDef} />
+            <Props name="Notify Request" schema={notify} />
+            <Props name="Index Response" schema={index} />
+            <Props name="One of" schema={oneOf} />
+            <Props name="Extra Properties" schema={otherProps} />
+          </Story>
+        </Stories>
+      </AppContainer>
+    ), root
+  );
 };
 
 if (module.hot) {
-  module.hot.accept('./components/JSONSchemaTable', load);
+  module.hot.accept('./components/JSONSchemaTableNew', load);
 }
 
 load();

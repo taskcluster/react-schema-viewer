@@ -1,0 +1,11 @@
+.short {
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 8em;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+
+.popover {
+  max-width: 90vw;
+}
