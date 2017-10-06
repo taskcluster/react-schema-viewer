@@ -1,5 +1,8 @@
 # react-jsonschema-viewer
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/taskcluster/react-jsonschema-viewer/master/viewer.png" height="250">
+</p>
 
 ---
 
