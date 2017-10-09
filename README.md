@@ -29,3 +29,4 @@ render((
 | Property | Type        | Required? | Description             |
 |----------|-------------|-----------|-------------------------|
 | `schema` | JSON Object | Yes       | The JSON schema to view |
+| `headerBackgroundColor` | string | No       | The header background color |

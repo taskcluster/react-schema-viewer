@@ -1,0 +1,12 @@
+.container {
+  border: 1px solid #ddd;
+}
+
+.headerContainer {
+  padding: 10px 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.source {
+  font-size: 0.7em;
+}

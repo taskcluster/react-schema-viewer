@@ -14,7 +14,10 @@ const Pattern = ({ pattern }) => {
         <code>{pattern}</code>
       </Popover>
     )}>
-      <code className={styles.short}>{pattern}</code>
+      <code className={styles.short}>
+        {pattern.slice(0, PATTERN_MAX)}
+        <span className={styles.dots}>...</span>
+      </code>
     </OverlayTrigger>
   );
 };
