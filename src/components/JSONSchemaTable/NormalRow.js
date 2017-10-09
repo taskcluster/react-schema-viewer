@@ -4,13 +4,10 @@ import Markdown from '../../widgets/Markdown';
 import CodeTooltip from '../../widgets/CodeTooltip';
 
 export default class NormalRow extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   limits(schema) {
     const min = schema.minLength || schema.minItems || schema.minimum;
     const max = schema.maxLength || schema.maxItems || schema.maximum;
+
     if (min || max) {
       return `[${min || 0}:${max || '∞'}]`;
     }
@@ -18,14 +15,12 @@ export default class NormalRow extends React.PureComponent {
 
   formatField(schema) {
     if (schema.pattern) {
-      return (
-        <CodeTooltip pattern={schema.pattern} />
-      );
+      return <CodeTooltip pattern={schema.pattern} />;
     } else if (schema.format) {
-      return (<span>{schema.format}</span>);
+      return <span>{schema.format}</span>;
     } else if (schema.enum) {
       return (
-        <ul className={styles.formats}>
+        <ul className={styles.list}>
           {schema.enum.map(val => (
             <li key={`${schema.id}-${val}`}>
               <CodeTooltip pattern={val} />
@@ -43,7 +38,12 @@ export default class NormalRow extends React.PureComponent {
     return (
       <tr>
         <td>
-          <span>{name}<span className={styles.required}>{required && '*'}</span></span>
+          <strong>
+            <span>
+              {name}
+              <span title="required" className={styles.required}>{required && ' *'}</span>
+            </span>
+          </strong>
         </td>
         <td>
           {type || schema.type}{this.limits(schema)}

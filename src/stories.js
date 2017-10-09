@@ -7,7 +7,7 @@ import JSONSchemaTable from './components/JSONSchemaTable';
 const root = document.getElementById('root');
 
 const load = async () => {
-  const getClientResponse = await (await fetch('http://schemas.taskcluster.net/auth/v1/get-client-response.json')).json();
+  const getClientResponse = await (await fetch('http://schemas.taskcluster.net/hooks/v1/hook-status.json#')).json();
   const taskDef = await (await fetch('http://schemas.taskcluster.net/queue/v1/task.json')).json();
   const notify = await (await fetch('http://schemas.taskcluster.net/notify/v1/email-request.json')).json();
   const index = await (await fetch('http://schemas.taskcluster.net/index/v1/indexed-task-response.json')).json();
@@ -20,6 +20,8 @@ const load = async () => {
         <Stories>
           <Story component={JSONSchemaTable} >
             <Props name="Get Client Response" schema={getClientResponse} />
+            <Props name="Green Header Background" headerBackgroundColor={'rgba(73, 204, 144, 0.1)'} schema={getClientResponse} />
+            <Props name="Condensed" condensed={true} schema={getClientResponse} />
             <Props name="Task Definition" schema={taskDef} />
             <Props name="Notify Request" schema={notify} />
             <Props name="Index Response" schema={index} />

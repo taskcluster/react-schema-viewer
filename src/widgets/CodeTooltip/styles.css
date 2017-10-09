@@ -1,9 +1,10 @@
 .short {
   white-space: nowrap;
   overflow: hidden;
-  max-width: 8em;
-  text-overflow: ellipsis;
-  display: inline-block;
+}
+
+.dots {
+  font-size: 0.5em;
 }
 
 .popover {

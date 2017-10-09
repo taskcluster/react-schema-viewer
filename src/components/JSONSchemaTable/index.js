@@ -1,12 +1,23 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Table } from 'react-bootstrap';
-import { object } from 'prop-types';
-import Markdown from '../../widgets/Markdown';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { object, bool, oneOf, string } from 'prop-types';
+import Container from '../../widgets/Container';
 import NormalRow from './NormalRow';
 import styles from './styles.css';
 
 export default class JSONSchemaTable extends React.PureComponent {
+  static propTypes = {
+    schema: object.isRequired,
+    headerBackgroundColor: string,
+    condensed: bool,
+  };
+
+  static defaultProps = {
+    condensed: false,
+    headerBackgroundColor: '#f5f5f5'
+  };
+
   objectTable(schema, name, reqSet, key) {
     let res = [];
 
@@ -14,6 +25,7 @@ export default class JSONSchemaTable extends React.PureComponent {
       res = Object.entries(schema.properties).map(([name, prop]) => {
         return this.schemaTable(prop, name, reqSet, `${key}-${name}`);
       });
+
       if (schema.additionalProperties) {
         res.push((
           <tbody key={`${key}-additional`}>
@@ -43,7 +55,7 @@ export default class JSONSchemaTable extends React.PureComponent {
         <NormalRow schema={schema} name={name} type='Object of' reqSet={reqSet}/>
         <tr>
           <td colSpan={4}>
-            <Table responsive>
+            <Table bordered className={styles.childTable} responsive>
               {res}
             </Table>
           </td>
@@ -54,11 +66,11 @@ export default class JSONSchemaTable extends React.PureComponent {
 
   combination(schema, things, name, type, key) {
     return (
-      <tbody className={styles.joined}>
+      <tbody key={`combination-${key}`} className={styles.joined}>
         <NormalRow schema={schema} name={name} type={type}/>
         <tr>
           <td colSpan={4}>
-            <Table>
+            <Table bordered className={styles.childTable}>
               {things.map((thing, i) => {
                 return this.schemaTable(thing, thing.title, null, `${key}-${i}`);
               })}
@@ -88,7 +100,7 @@ export default class JSONSchemaTable extends React.PureComponent {
           <NormalRow schema={schema} name={name} type='Array of' reqSet={reqSet}/>
           <tr>
             <td colSpan={4}>
-              <Table condensed responsive>
+              <Table condensed={this.props.condensed} responsive>
                 {this.schemaTable(
                   schema.items,
                   schema.items.title,
@@ -108,37 +120,18 @@ export default class JSONSchemaTable extends React.PureComponent {
     }
   }
 
-  renderHeader() {
-    const { schema } = this.props;
-
-    return (
-      <div className={styles.panelHeading}>
-        <h3>
-          {schema.title}&nbsp;{schema.id && (
-          <a href={schema.id} target='_blank' rel='noopener noreferrer'>
-            (source)
-          </a>
-        )}
-        </h3>
-        <Markdown>{schema.description}</Markdown>
-      </div>
-    )
-  }
-
   render() {
-    const { schema } = this.props;
-
     return (
-      <div className={styles.panel}>
-        {this.renderHeader()}
-        <Table condensed responsive className={styles.topTable}>
-          {this.schemaTable(schema, null, null, schema.id)}
+      <Container
+        backgroundColor={this.props.headerBackgroundColor}
+        schema={this.props.schema}>
+        <Table
+          condensed={this.props.condensed}
+          responsive
+          className={styles.parentTable}>
+          {this.schemaTable(this.props.schema, null, null, this.props.schema.id)}
         </Table>
-      </div>
+      </Container>
     );
   }
 }
-
-JSONSchemaTable.propTypes = {
-  schema: object.isRequired
-};

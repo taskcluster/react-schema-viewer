@@ -1,36 +1,38 @@
 {
   "name": "react-jsonschema-viewer",
   "version": "1.0.0",
-  "description": "react jsonschema documentation builder",
+  "description": "React JSON Schema Viewer",
   "license": "MPL-2.0",
   "scripts": {
     "build": "neutrino build",
     "start": "neutrino start",
     "test": "neutrino build"
   },
-  "main": "lib/JSONSchemaDoc.js",
+  "main": "lib/JSONSchemaTable.js",
   "files": [
     "lib",
     "src/components"
   ],
   "keywords": [
+    "react",
     "json",
     "schema",
-    "jsonschema"
+    "jsonschema",
+    "viewer"
   ],
   "dependencies": {
     "bootstrap": "^3.3.7",
     "markdown-it": "^8.4.0",
-    "prop-types": "^15.5.10",
-    "react": "^15.6.1",
+    "prop-types": "^15.6.0",
+    "react": "^16.0.0",
     "react-bootstrap": "^0.31.3",
-    "react-dom": "^15.6.1",
+    "react-dom": "^16.0.0",
     "react-hot-loader": "3.0.0-beta.7",
-    "source-map-support": "^0.4.16"
+    "source-map-support": "^0.5.0"
   },
   "devDependencies": {
-    "neutrino": "^6.1.5",
+    "neutrino": "^7.1.0",
     "neutrino-preset-react-components": "^2.1.1",
-    "react-addons-css-transition-group": "^15.6.0"
+    "react-addons-css-transition-group": "^15.6.2"
   }
 }

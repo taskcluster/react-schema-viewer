@@ -1,38 +1,27 @@
-.panel {
-  border: 1px solid rgb(221, 221, 221);
-  color: #222;
+:global(html, body) {
+  font-size: 16px;
 }
 
-.panelHeading {
-  background-color: #eee;
-  padding: 1em;
-}
-
-.panelHeading a {
-  font-size: 0.7em;
-}
-
-.topTable {
-  border-collapse: collapse;
+.parentTable {
   font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.8em;
 }
 
-.topTable table {
-  border-bottom: 1px solid rgb(221, 221, 221);
-  border-top: 1px solid rgb(221, 221, 221);
-  border-left: 1px solid rgb(221, 221, 221);
+.parentTable tbody:first-child tr td {
+  border: 0;
+}
+
+.childTable tbody tr td {
+  border: 0;
+}
+
+tr td {
+  white-space: nowrap;
 }
 
 tr td:nth-child(4) {
-  font-family: Sans-Serif;
-}
-
-tr {
-  border-top: 1px solid rgb(221, 221, 221);
-}
-
-td {
-  padding: 0.2em;
+  font-family: Open Sans,sans-serif;
+  white-space: normal;
 }
 
 .joined > tr:first-child {
@@ -58,6 +47,7 @@ code {
   background-color: #f9f2f4;
 }
 
-.formats {
-  list-style: none;
+.list {
+  padding-left: 0;
+  list-style-position: inside;
 }
