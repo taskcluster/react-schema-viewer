@@ -1,12 +1,12 @@
-# react-jsonschema-viewer
+# react-schema-viewer
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/taskcluster/react-jsonschema-viewer/master/viewer.png" height="250">
+  <img src="https://raw.githubusercontent.com/taskcluster/react-schema-viewer/master/viewer.png" height="250">
 </p>
 
 ---
 
-React JSON Schema Viewer takes a JSON Schema as input and uses it to generate comprehensible views.
+React Schema Viewer takes a JSON Schema as input and uses it to generate comprehensible views.
 It has full support for JSON Schema version 3 and 4.
 
 ## JSONSchemaTable
@@ -18,7 +18,7 @@ After importing the component, it can be rendered with the required `schema` pro
 ```js
 import React from 'react';
 import { render } from 'react-dom';
-import { JSONSchemaTable } from 'react-jsonschema-viewer';
+import JSONSchemaTable from 'react-jsonschema-viewer';
 
 render((
   <JSONSchemaTable schema="http://example.json" />
