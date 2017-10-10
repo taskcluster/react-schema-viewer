@@ -11,11 +11,13 @@ export default class JSONSchemaTable extends React.PureComponent {
     schema: object.isRequired,
     headerBackgroundColor: string,
     condensed: bool,
+    maxHeight: string
   };
 
   static defaultProps = {
+    headerBackgroundColor: '#f5f5f5',
     condensed: false,
-    headerBackgroundColor: '#f5f5f5'
+    maxHeight: '100%',
   };
 
   objectTable(schema, name, reqSet, key) {
@@ -124,6 +126,7 @@ export default class JSONSchemaTable extends React.PureComponent {
     return (
       <Container
         backgroundColor={this.props.headerBackgroundColor}
+        maxHeight={this.props.maxHeight}
         schema={this.props.schema}>
         <Table
           condensed={this.props.condensed}

@@ -1,10 +1,15 @@
 .container {
   border: 1px solid #ddd;
+  overflow-y: auto;
 }
 
 .headerContainer {
   padding: 10px 8px;
   border-bottom: 1px solid #ddd;
+}
+
+.title {
+  margin-top: 0;
 }
 
 .source {
