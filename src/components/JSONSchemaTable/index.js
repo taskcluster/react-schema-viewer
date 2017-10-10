@@ -55,7 +55,7 @@ export default class JSONSchemaTable extends React.PureComponent {
         <NormalRow schema={schema} name={name} type='Object of' reqSet={reqSet}/>
         <tr>
           <td colSpan={4}>
-            <Table bordered className={styles.childTable} responsive>
+            <Table condensed={this.props.condensed} bordered className={styles.childTable} responsive>
               {res}
             </Table>
           </td>
