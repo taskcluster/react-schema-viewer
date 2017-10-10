@@ -8,21 +8,23 @@ export default class Container extends React.PureComponent {
 
     return (
       <div style={{ backgroundColor }} className={styles.headerContainer}>
-        <h3>
+        <h4 className={styles.title}>
           {schema.title}&nbsp;{schema.id && (
           <a className={styles.source} href={schema.id} target='_blank' rel='noopener noreferrer'>
             (source)
           </a>
         )}
-        </h3>
+        </h4>
         <Markdown>{schema.description}</Markdown>
       </div>
     );
   };
 
   render() {
+    const maxHeight = this.props.maxHeight;
+
     return (
-      <div className={styles.container}>
+      <div style={{ maxHeight }} className={styles.container}>
         <div>
           {this.renderHeader()}
         </div>
