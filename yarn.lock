@@ -2940,6 +2940,14 @@ javascript-stringify@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/javascript-stringify/-/javascript-stringify-1.6.0.tgz#142d111f3a6e3dae8f4a9afd77d45855b5a9cce3"
 
+joi-browser@^10.6.1:
+  version "10.6.1"
+  resolved "https://registry.yarnpkg.com/joi-browser/-/joi-browser-10.6.1.tgz#1cfc1a244c9242327842c24354d8ead1c2fe3571"
+
+joi-to-json-schema@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/joi-to-json-schema/-/joi-to-json-schema-3.0.0.tgz#06b0d310a9d2098e2dcce1747c58dfbc593f663f"
+
 js-base64@^2.1.9:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.3.2.tgz#a79a923666372b580f8e27f51845c6f7e8fbfbaf"

@@ -2,22 +2,25 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { object, bool, oneOf, string } from 'prop-types';
+import joiToJson from 'joi-to-json-schema';
 import Container from '../../widgets/Container';
 import NormalRow from './NormalRow';
 import styles from './styles.css';
 
-export default class JSONSchemaTable extends React.PureComponent {
+export default class SchemaTable extends React.PureComponent {
   static propTypes = {
     schema: object.isRequired,
     headerBackgroundColor: string,
     condensed: bool,
-    maxHeight: string
+    maxHeight: string,
+    type: string
   };
 
   static defaultProps = {
     headerBackgroundColor: '#f5f5f5',
     condensed: false,
     maxHeight: '100%',
+    type: 'json'
   };
 
   objectTable(schema, name, reqSet, key) {
@@ -123,16 +126,20 @@ export default class JSONSchemaTable extends React.PureComponent {
   }
 
   render() {
+    const schema = this.props.type === 'joi' ?
+      joiToJson(this.props.schema) :
+      this.props.schema;
+
     return (
       <Container
         backgroundColor={this.props.headerBackgroundColor}
         maxHeight={this.props.maxHeight}
-        schema={this.props.schema}>
+        schema={schema}>
         <Table
           condensed={this.props.condensed}
           responsive
           className={styles.parentTable}>
-          {this.schemaTable(this.props.schema, null, null, this.props.schema.id)}
+          {this.schemaTable(schema, null, null, schema.id)}
         </Table>
       </Container>
     );

@@ -21,12 +21,12 @@ export default class Container extends React.PureComponent {
   };
 
   render() {
-    const maxHeight = this.props.maxHeight;
+    const { maxHeight, schema }= this.props;
 
     return (
       <div style={{ maxHeight }} className={styles.container}>
         <div>
-          {this.renderHeader()}
+          {schema.title && this.renderHeader()}
         </div>
         <div>
           {this.props.children}

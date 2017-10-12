@@ -8,7 +8,8 @@
     "start": "neutrino start",
     "test": "neutrino build"
   },
-  "main": "lib/JSONSchemaTable.js",
+  "repository": "taskcluster/react-schema-viewer",
+  "main": "lib/SchemaTable.js",
   "files": [
     "lib",
     "src/components"
@@ -22,6 +23,8 @@
   ],
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "joi-browser": "^10.6.1",
+    "joi-to-json-schema": "^3.0.0",
     "markdown-it": "^8.4.0",
     "prop-types": "^15.6.0",
     "react": "^15.5.4",
