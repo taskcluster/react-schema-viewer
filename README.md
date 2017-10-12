@@ -21,6 +21,16 @@ It has full support for Joi and JSON schema (version 3 and 4).
 
 ### Usage
 
+react-schema-viewer is an ES-compatible module, so it can be imported as expected. If you want to use it with CJS require, you'll need to use the .default property to access the default exports:
+
+```js
+// CJS require
+const SchemaViewer = require('react-schema-viewer').default;
+
+// ES module
+import SchemaViewer from 'react-schema-viewer';
+```
+
 _Example: Rendering a JSON schema:_
 ```js
 import React from 'react';
