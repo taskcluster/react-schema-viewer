@@ -81,6 +81,20 @@ render((
 ), document.getElementById('root'));
 ````
 
+## Development and Contributing
+
+This repository uses [Neutrino](https://neutrino.js.org) and [neutrino-preset-react-components](https://github.com/eliperelman/neutrino-preset-react-components/) for developing, previewing, and building React components. To get started:
+
+- Fork and clone this repo.
+- Install the dependencies with `yarn`.
+- Start the development servers with `yarn start`.
+- Use CTRL-C to exit the development server.
+- Use `yarn build` to generate the compiled component for publishing to npm.
+
+Feel free to open an issue, submit a pull request, or contribute however you would like. Understand that this
+documentation is still a work in progress, so file an issue or submit a PR to ask questions or make improvements.
+Thanks!
+
 ## License
 
 react-schema-viewer is released as [MPL 2.0](http://mozilla.org/MPL/2.0/).
