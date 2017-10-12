@@ -9,7 +9,7 @@
 React Schema Viewer takes a schema as input and uses it to generate comprehensible views.
 It has full support for Joi and JSON schema (version 3 and 4).
 
-## SchemaTable
+## SchemaViewer
 
 ### Props
 | Property                | Type                       | Required? | Description                                                                                       |
@@ -35,7 +35,7 @@ _Example: Rendering a JSON schema:_
 ```js
 import React from 'react';
 import { render } from 'react-dom';
-import SchemaTable from 'react-schema-viewer';
+import SchemaViewer from 'react-schema-viewer';
 
 const JSONSchema = {
   'title': 'Person',
@@ -57,7 +57,7 @@ const JSONSchema = {
 };
 
 render((
-  <SchemaTable schema={JSONSchema} />
+  <SchemaViewer schema={JSONSchema} />
 ), document.getElementById('root'));
 ````
 
@@ -65,7 +65,7 @@ _Example: Rendering a Joi object schema:_
 ```js
 import React from 'react';
 import { render } from 'react-dom';
-import SchemaTable from 'react-schema-viewer';
+import SchemaViewer from 'react-schema-viewer';
 
 const joiSchema = joi.object({
   client_id: joi.string().optional(),
@@ -77,7 +77,7 @@ const joiSchema = joi.object({
 });
 
 render((
-  <SchemaTable schema={joiSchema} />
+  <SchemaViewer type="joi" schema={joiSchema} />
 ), document.getElementById('root'));
 ````
 
