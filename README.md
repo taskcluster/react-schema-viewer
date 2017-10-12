@@ -6,8 +6,8 @@
 
 ---
 
-React Schema Viewer takes a Schema as input and uses it to generate comprehensible views.
-It has full support for Joi and JSON Schema (version 3 and 4).
+React Schema Viewer takes a schema as input and uses it to generate comprehensible views.
+It has full support for Joi and JSON schema (version 3 and 4).
 
 ## SchemaTable
 
@@ -70,3 +70,7 @@ render((
   <SchemaTable schema={joiSchema} />
 ), document.getElementById('root'));
 ````
+
+## License
+
+react-schema-viewer is released as [MPL 2.0](http://mozilla.org/MPL/2.0/).
