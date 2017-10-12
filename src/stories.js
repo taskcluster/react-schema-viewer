@@ -2,25 +2,35 @@ import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Stories, Story, Props } from 'neutrino-preset-react-components/lib';
-import JSONSchemaTable from './components/JSONSchemaTable';
+import SchemaTable from './components/SchemaTable';
+import joi from 'joi-browser';
 
 const root = document.getElementById('root');
 
 const load = async () => {
-  const getClientResponse = await (await fetch('http://schemas.taskcluster.net/hooks/v1/hook-status.json#')).json();
+  const getClientResponse = await (await fetch('http://schemas.taskcluster.net/hooks/v1/hook-status.json')).json();
   const taskDef = await (await fetch('http://schemas.taskcluster.net/queue/v1/task.json')).json();
   const notify = await (await fetch('http://schemas.taskcluster.net/notify/v1/email-request.json')).json();
   const index = await (await fetch('http://schemas.taskcluster.net/index/v1/indexed-task-response.json')).json();
   const oneOf = await (await fetch('http://schemas.taskcluster.net/queue/v1/post-artifact-request.json')).json();
   const otherProps = await (await fetch('http://schemas.taskcluster.net/queue/v1/provisioner-response.json')).json();
+  const joiSchema = joi.object({
+    client_id: joi.string().optional(),
+    addon_version: joi.string().required(),
+    locale: joi.string().required(),
+    session_id: joi.string(),
+    page: joi.string().valid(["about:home", "about:newtab", "unknown"]),
+    user_prefs: joi.number().integer().required()
+  });
 
   render(
     (
       <AppContainer>
         <Stories>
-          <Story component={JSONSchemaTable} >
-            <Props name="Get Client Response" schema={getClientResponse} />
-            <Props name="Green Header Background" headerBackgroundColor={'rgba(73, 204, 144, 0.1)'} schema={getClientResponse} />
+          <Story component={SchemaTable} >
+            <Props name="Get Client Response" schema={JSONSchema} />
+            <Props name="Joi example" type='joi' schema={joiSchema} />
+            <Props name="Green Header Background" headerBackgroundColor={'rgb(245, 245, 245)'} schema={getClientResponse} />
             <Props name="Condensed" condensed={true} schema={getClientResponse} />
             <Props name="Task Definition" schema={taskDef} />
             <Props name="Notify Request" schema={notify} />
@@ -35,7 +45,7 @@ const load = async () => {
 };
 
 if (module.hot) {
-  module.hot.accept('./components/JSONSchemaTable', load);
+  module.hot.accept('./components/SchemaTable', load);
 }
 
 load();
