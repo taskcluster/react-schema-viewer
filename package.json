@@ -17,6 +17,8 @@
   "keywords": [
     "react",
     "json",
+    "joi",
+    "validation",
     "schema",
     "jsonschema",
     "viewer"
