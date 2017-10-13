@@ -5,10 +5,17 @@ import CodeTooltip from '../../widgets/CodeTooltip';
 
 export default class NormalRow extends React.PureComponent {
   limits(schema) {
-    const min = schema.minLength || schema.minItems || schema.minimum;
-    const max = schema.maxLength || schema.maxItems || schema.maximum;
+    const isNumber = prop => typeof prop === 'number';
 
-    if (min || max) {
+    const min = (isNumber(schema.minLength) && schema.minLength) ||
+      (isNumber(schema.minItems) && schema.minItems) ||
+      (isNumber(schema.minimum) && schema.minimum);
+
+    const max = (isNumber(schema.maxLength) && schema.maxLength)
+      || (isNumber(schema.maxItems) && schema.maxItems)
+      || (isNumber(schema.maximum) && schema.maximum);
+
+    if (isNumber(min) || isNumber(max)) {
       return `[${min || 0}:${max || '∞'}]`;
     }
   }

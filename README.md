@@ -62,7 +62,7 @@ render((
 ````
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/taskcluster/react-schema-viewer/master/json.png" height="175">
+  <img src="https://raw.githubusercontent.com/taskcluster/react-schema-viewer/master/json-joi.png" height="175">
 </p>
 
 _Example: Rendering a Joi object schema:_
@@ -83,7 +83,7 @@ render((
 ````
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/taskcluster/react-schema-viewer/master/joi.png" height="175">
+  <img src="https://raw.githubusercontent.com/taskcluster/react-schema-viewer/master/json-joi.png" height="175">
 </p>
 
 ## Development and Contributing
