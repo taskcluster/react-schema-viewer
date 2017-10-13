@@ -37,7 +37,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import SchemaViewer from 'react-schema-viewer';
 
-const JSONSchema = {
+const jsonSchema = {
   'title': 'Person',
   'type': 'object',
   'properties': {
@@ -57,9 +57,13 @@ const JSONSchema = {
 };
 
 render((
-  <SchemaViewer schema={JSONSchema} />
+  <SchemaViewer schema={jsonSchema} />
 ), document.getElementById('root'));
 ````
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/taskcluster/react-schema-viewer/master/json.png" height="250">
+</p>
 
 _Example: Rendering a Joi object schema:_
 ```js
@@ -67,19 +71,20 @@ import React from 'react';
 import { render } from 'react-dom';
 import SchemaViewer from 'react-schema-viewer';
 
-const joiSchema = joi.object({
-  client_id: joi.string().optional(),
-  addon_version: joi.string().required(),
-  locale: joi.string().required(),
-  session_id: joi.string(),
-  page: joi.string().valid(["about:home", "about:newtab", "unknown"]),
-  user_prefs: joi.number().integer().required()
-});
+joi.object({
+  firstName: joi.string().required(),
+  lastName: joi.string().required(),
+  age: joi.number().integer().min(0).description('Age in years'),
+}).label('Person');
 
 render((
   <SchemaViewer type="joi" schema={joiSchema} />
 ), document.getElementById('root'));
 ````
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/taskcluster/react-schema-viewer/master/joi.png" height="250">
+</p>
 
 ## Development and Contributing
 
