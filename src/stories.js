@@ -28,9 +28,9 @@ const load = async () => {
       <AppContainer>
         <Stories>
           <Story component={SchemaTable} >
-            <Props name="Get Client Response" schema={JSONSchema} />
+            <Props name="Get Client Response" schema={getClientResponse} />
             <Props name="Joi example" type='joi' schema={joiSchema} />
-            <Props name="Green Header Background" headerBackgroundColor={'rgb(245, 245, 245)'} schema={getClientResponse} />
+            <Props name="Green Header Background" headerBackgroundColor={'rgba(73, 204, 144, 0.1)'} schema={getClientResponse} />
             <Props name="Condensed" condensed={true} schema={getClientResponse} />
             <Props name="Task Definition" schema={taskDef} />
             <Props name="Notify Request" schema={notify} />
