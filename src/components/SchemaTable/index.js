@@ -98,25 +98,34 @@ export default class SchemaTable extends React.PureComponent {
       return this.combination(schema, schema.oneOf, name, 'One of', key);
     }
 
+    const renderArray = () => (
+      <tbody className={styles.joined} key={key}>
+      <NormalRow schema={schema} name={name} type='Array of' reqSet={reqSet}/>
+      <tr>
+        <td colSpan={4}>
+          <Table condensed={this.props.condensed} responsive>
+            {this.schemaTable(
+              schema.items,
+              schema.items.title,
+              reqSet,
+              `${key}-${schema.items.title}`
+            )}
+          </Table>
+        </td>
+      </tr>
+      </tbody>
+    );
+    const renderObject = () => this.objectTable(schema, name, reqSet, key);
+
     switch (schema.type) {
-      case 'object': return this.objectTable(schema, name, reqSet, key);
-      case 'array': return (
-        <tbody className={styles.joined} key={key}>
-          <NormalRow schema={schema} name={name} type='Array of' reqSet={reqSet}/>
-          <tr>
-            <td colSpan={4}>
-              <Table condensed={this.props.condensed} responsive>
-                {this.schemaTable(
-                  schema.items,
-                  schema.items.title,
-                  reqSet,
-                  `${key}-${schema.items.title}`
-                )}
-              </Table>
-            </td>
-          </tr>
-        </tbody>
-      );
+      case 'object': return renderObject();
+      case 'array': return renderArray();
+      case undefined:
+        if (schema.properties) {
+          return renderObject();
+        } else if (schema.items) {
+          return renderArray();
+        }
       default: return (
         <tbody key={key}>
           <NormalRow schema={schema} name={name} reqSet={reqSet}/>

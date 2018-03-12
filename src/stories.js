@@ -8,6 +8,7 @@ import joi from 'joi-browser';
 const root = document.getElementById('root');
 
 const load = async () => {
+  const treeherderConfig = await (await fetch('http://schemas.taskcluster.net/taskcluster-treeherder/v1/task-treeherder-config.json')).json();
   const getClientResponse = await (await fetch('http://schemas.taskcluster.net/hooks/v1/hook-status.json')).json();
   const taskDef = await (await fetch('http://schemas.taskcluster.net/queue/v1/task.json')).json();
   const notify = await (await fetch('http://schemas.taskcluster.net/notify/v1/email-request.json')).json();
@@ -28,6 +29,7 @@ const load = async () => {
       <AppContainer>
         <Stories>
           <Story component={SchemaTable} >
+            <Props name="Treeherder configuration" schema={treeherderConfig} />
             <Props name="Get Client Response" schema={getClientResponse} />
             <Props name="Joi example" type='joi' schema={joiSchema} />
             <Props name="Green Header Background" headerBackgroundColor={'rgba(73, 204, 144, 0.1)'} schema={getClientResponse} />
