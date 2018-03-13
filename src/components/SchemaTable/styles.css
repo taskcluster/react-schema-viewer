@@ -11,11 +11,11 @@
   border: 0;
 }
 
-tr td {
+.parentTable tr td {
   white-space: nowrap;
 }
 
-tr td:nth-child(4) {
+.parentTable tr td:nth-child(4) {
   font-family: Open Sans,sans-serif;
   white-space: normal;
 }
@@ -38,16 +38,11 @@ tr td:nth-child(4) {
   font-size: 0.7em;
 }
 
-code {
-  color: #c7254e;
-  background-color: #f9f2f4;
-}
-
 .list {
   padding-left: 0;
   list-style-position: inside;
 }
 
-tbody table {
+.parentTable tbody table {
   background-color: initial !important;;
 }
