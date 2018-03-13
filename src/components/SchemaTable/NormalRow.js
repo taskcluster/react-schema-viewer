@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './styles.css';
 import Markdown from '../../widgets/Markdown';
 import CodeTooltip from '../../widgets/CodeTooltip';
+import styles from './styles.css';
 
 export default class NormalRow extends React.PureComponent {
   limits(schema) {

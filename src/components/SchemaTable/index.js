@@ -11,14 +11,12 @@ export default class SchemaTable extends React.PureComponent {
   static propTypes = {
     schema: object.isRequired,
     headerBackgroundColor: string,
-    condensed: bool,
     maxHeight: string,
     type: string
   };
 
   static defaultProps = {
     headerBackgroundColor: '#f5f5f5',
-    condensed: false,
     maxHeight: '100%',
     type: 'json'
   };
@@ -60,7 +58,7 @@ export default class SchemaTable extends React.PureComponent {
         <NormalRow schema={schema} name={name} type='Object of' reqSet={reqSet}/>
         <tr>
           <td colSpan={4}>
-            <Table condensed={this.props.condensed} bordered className={styles.childTable} responsive>
+            <Table bordered className={styles.childTable} responsive>
               {res}
             </Table>
           </td>
@@ -100,19 +98,19 @@ export default class SchemaTable extends React.PureComponent {
 
     const renderArray = () => (
       <tbody className={styles.joined} key={key}>
-      <NormalRow schema={schema} name={name} type='Array of' reqSet={reqSet}/>
-      <tr>
-        <td colSpan={4}>
-          <Table condensed={this.props.condensed} responsive>
-            {this.schemaTable(
-              schema.items,
-              schema.items.title,
-              reqSet,
-              `${key}-${schema.items.title}`
-            )}
-          </Table>
-        </td>
-      </tr>
+        <NormalRow schema={schema} name={name} type='Array of' reqSet={reqSet}/>
+        <tr>
+          <td colSpan={4}>
+            <Table responsive>
+              {this.schemaTable(
+                schema.items,
+                schema.items.title,
+                reqSet,
+                `${key}-${schema.items.title}`
+              )}
+            </Table>
+          </td>
+        </tr>
       </tbody>
     );
     const renderObject = () => this.objectTable(schema, name, reqSet, key);
@@ -145,7 +143,6 @@ export default class SchemaTable extends React.PureComponent {
         maxHeight={this.props.maxHeight}
         schema={schema}>
         <Table
-          condensed={this.props.condensed}
           responsive
           className={styles.parentTable}>
           {this.schemaTable(schema, null, null, schema.id)}

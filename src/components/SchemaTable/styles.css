@@ -47,3 +47,7 @@ code {
   padding-left: 0;
   list-style-position: inside;
 }
+
+tbody table {
+  background-color: initial !important;;
+}
