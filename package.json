@@ -25,7 +25,7 @@
     "viewer"
   ],
   "dependencies": {
-    "bootstrap": "^4.0.0",
+    "bootstrap": "^3.3.7",
     "joi-to-json-schema": "^3.0.0",
     "markdown-it": "^8.4.0",
     "prop-types": "^15.6.0",
