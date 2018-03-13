@@ -4,10 +4,10 @@ import styles from './styles.css';
 
 export default class Container extends React.PureComponent {
   renderHeader = () => {
-    const { schema, backgroundColor } = this.props;
+    const { schema, backgroundColor, borderColor } = this.props;
 
     return (
-      <div style={{ backgroundColor }} className={styles.headerContainer}>
+      <div style={{ backgroundColor, borderColor }} className={styles.headerContainer}>
         <h4 className={styles.title}>
           {schema.title}&nbsp;{schema.id && (
           <a className={styles.source} href={schema.id} target='_blank' rel='noopener noreferrer'>
@@ -21,10 +21,10 @@ export default class Container extends React.PureComponent {
   };
 
   render() {
-    const { maxHeight, schema } = this.props;
+    const { maxHeight, schema, borderColor } = this.props;
 
     return (
-      <div style={{ maxHeight }} className={styles.container}>
+      <div style={{ maxHeight, borderColor }} className={styles.container}>
         <div>
           {schema.title && this.renderHeader()}
         </div>

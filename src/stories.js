@@ -30,7 +30,7 @@ const load = async () => {
         <Stories>
           <Story component={SchemaTable} >
             <Props name="Treeherder configuration" schema={treeherderConfig} />
-            <Props name="Get Client Response" schema={getClientResponse} />
+            <Props name="Get Client Response" borderColor="black" schema={getClientResponse} />
             <Props name="Joi example" type='joi' schema={joiSchema} />
             <Props name="Green Header Background" headerBackgroundColor={'rgba(73, 204, 144, 0.1)'} schema={getClientResponse} />
             <Props name="Task Definition" schema={taskDef} />

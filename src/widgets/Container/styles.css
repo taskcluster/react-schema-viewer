@@ -1,11 +1,11 @@
 .container {
-  border: 1px solid #ddd;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
   overflow-y: auto;
 }
 
 .headerContainer {
   padding: 10px 8px;
-  border-bottom: 1px solid #ddd;
 }
 
 .title {
