@@ -17,7 +17,6 @@ It has full support for Joi and JSON schema (version 3 and 4).
 | `schema`                | Object                     | ✓         | Schema object representation in one the supported schema types.                                   |
 | `type`                  | enumerated: 'json' &#124; 'joi' | -         | Object schema validation type. Default: 'json'.                                                   |
 | `headerBackgroundColor` | string                     | -         | The header background color given that a schema title is provided. Default: 'rgb(245, 245, 245)'. |
-| `borderColor`           | string                     | -         | The border color of table rows and container.                                                          |
 | `maxHeight`             | string                     | -         | Max height of the panel. Default: '100%'.                                                          |
 
 ### Usage

@@ -4,6 +4,7 @@ import { AppContainer } from 'react-hot-loader';
 import { Stories, Story, Props } from 'neutrino-preset-react-components/lib';
 import SchemaTable from './components/SchemaTable';
 import joi from 'joi-browser';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const root = document.getElementById('root');
 
@@ -30,7 +31,6 @@ const load = async () => {
         <Stories>
           <Story component={SchemaTable} >
             <Props name="Treeherder configuration" schema={treeherderConfig} />
-            <Props name="Get Client Response" borderColor="black" schema={getClientResponse} />
             <Props name="Joi example" type='joi' schema={joiSchema} />
             <Props name="Green Header Background" headerBackgroundColor={'rgba(73, 204, 144, 0.1)'} schema={getClientResponse} />
             <Props name="Task Definition" schema={taskDef} />
