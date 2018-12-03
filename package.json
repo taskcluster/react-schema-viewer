@@ -9,7 +9,7 @@
     "test": "neutrino build"
   },
   "repository": "taskcluster/react-schema-viewer",
-  "main": "lib/SchemaTable.js",
+  "main": "lib/SchemaViewer.js",
   "files": [
     "lib",
     "src/components"

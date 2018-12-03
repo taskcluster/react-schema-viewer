@@ -6,7 +6,7 @@ import Container from '../../widgets/Container';
 import NormalRow from './NormalRow';
 import styles from './styles.css';
 
-export default class SchemaTable extends React.PureComponent {
+export default class SchemaViewer extends React.PureComponent {
   static propTypes = {
     schema: object.isRequired,
     headerBackgroundColor: string,
