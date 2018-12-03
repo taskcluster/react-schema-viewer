@@ -1,0 +1,224 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "title": "Post Artifact Request",
+  "oneOf": [
+    {
+      "description": "Request a list of requests in a generalized format which can be run to\nupload an artifact to storage managed by the queue.\n",
+      "title": "Blob Artifact Request",
+      "additionalProperties": false,
+      "required": [
+        "storageType",
+        "expires",
+        "contentType",
+        "contentSha256",
+        "contentLength"
+      ],
+      "type": "object",
+      "properties": {
+        "contentType": {
+          "type": "string",
+          "description": "Artifact mime-type, when uploading artifact to the signed\n`PUT` URL returned from this request this must given with the\n `ContentType` header. Please, provide correct mime-type,\n this make tooling a lot easier, specifically,\n always using `application/json` for JSON artifacts.\n",
+          "maxLength": 255
+        },
+        "storageType": {
+          "enum": [
+            "blob"
+          ],
+          "type": "string",
+          "description": "Artifact storage type, in this case `'blob'`"
+        },
+        "contentLength": {
+          "minimum": 0,
+          "type": "integer",
+          "description": "The number of bytes of the entire artifact.  This must be the number\nof bytes in the file to be uploaded.  For single part uploads, the\nupload will fail if the number of bytes uploaded does not match this\nvalue.  A single part upload (e.g. no parts list) may be at most 5GB.\nThis limit is enforced in the code because it is not possible to\nrepresent all of the restrictions in a json-schema.  A multipart\nupload may be at most 5TB, with each part other than the last being\nbetween 5MB and 5GB in size.\n"
+        },
+        "expires": {
+          "type": "string",
+          "description": "Date-time after which the artifact should be deleted. Note, that\nthese will be collected over time, and artifacts may remain\navailable after expiration. S3 based artifacts are identified in\nazure table storage and explicitly deleted on S3 after expiration.\n",
+          "format": "date-time"
+        },
+        "contentEncoding": {
+          "type": "string",
+          "description": "Optionally provide an encoding type which should be set as the HTTP\nContent-Encoding header for this artifact.\n",
+          "maxLength": 255
+        },
+        "transferSha256": {
+          "pattern": "^[a-fA-F0-9]{64}$",
+          "type": "string",
+          "description": "This is the sha256 of the bytes transfered across the wire to the\nbacking datastore.  If specified, it represents the\npost-content-encoding sha256 value\n"
+        },
+        "parts": {
+          "minLength": 1,
+          "type": "array",
+          "description": "A list of parts for a multipart upload.  The presence of this list is\nhow a multipart upload is differentiated from a single part upload.\nThe items in this list represent individual parts for upload.  For a\nmultipart upload, the sha256 values provided here must match the\nsha256 value that S3 internally computes for the upload to be\nconsidered a success.  The overall sha256 value is not checked\nexplicitly because the S3 API does not allow for that, but the same\ncode that is responsible for generating the parts hashes would also\nbe generating the overall hash, which makes this less of a concern.\nThe worst case is that we have artifacts which incorrectly do not\nvalidate, which is not as big of a security concern.\n",
+          "items": {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "sha256": {
+                "pattern": "^[a-fA-F0-9]{64}$",
+                "type": "string",
+                "description": "The sha256 hash of the part.\n",
+                "minLength": 64,
+                "maxLength": 64
+              },
+              "size": {
+                "minimum": 0,
+                "type": "integer",
+                "description": "The number of bytes in this part.  Keep in mind for S3 that\nall but the last part must be minimum 5MB and the maximum for\na single part is 5GB.  The overall size may not exceed 5TB\n"
+              }
+            },
+            "title": "Multipart Part"
+          }
+        },
+        "contentSha256": {
+          "pattern": "^[a-fA-F0-9]{64}$",
+          "type": "string",
+          "description": "The complete SHA256 value of the entire artifact.  This must be the\nSHA256 of the file which is to be uploaded.  For single part uploads,\nthe upload will fail if the SHA256 value of what is uploaded does not\nmatch this value\n"
+        },
+        "transferLength": {
+          "minimum": 0,
+          "type": "integer",
+          "description": "The number of bytes transfered across the wire to the backing\ndatastore.  If specified, it represents the post-content-encoding\nbyte count\n"
+        }
+      }
+    },
+    {
+      "description": "Request for a signed PUT URL that will allow you to upload an artifact\nto an S3 bucket managed by the queue.\n",
+      "title": "S3 Artifact Request",
+      "additionalProperties": false,
+      "required": [
+        "storageType",
+        "expires",
+        "contentType"
+      ],
+      "type": "object",
+      "properties": {
+        "storageType": {
+          "enum": [
+            "s3"
+          ],
+          "type": "string",
+          "description": "Artifact storage type, in this case `'s3'`\n"
+        },
+        "expires": {
+          "type": "string",
+          "description": "Date-time after which the artifact should be deleted. Note, that\nthese will be collected over time, and artifacts may remain\navailable after expiration. S3 based artifacts are identified in\nazure table storage and explicitly deleted on S3 after expiration.\n",
+          "format": "date-time"
+        },
+        "contentType": {
+          "type": "string",
+          "description": "Artifact mime-type, when uploading artifact to the signed\n`PUT` URL returned from this request this must given with the\n `ContentType` header. Please, provide correct mime-type,\n this make tooling a lot easier, specifically,\n always using `application/json` for JSON artifacts.\n",
+          "maxLength": 255
+        }
+      }
+    },
+    {
+      "description": "Request for an Azure Shared Access Signature (SAS) that will allow\nyou to upload an artifact to an Azure blob storage container managed\nby the queue.\n",
+      "title": "Azure Artifact Request",
+      "additionalProperties": false,
+      "required": [
+        "storageType",
+        "expires",
+        "contentType"
+      ],
+      "type": "object",
+      "properties": {
+        "storageType": {
+          "enum": [
+            "azure"
+          ],
+          "type": "string",
+          "description": "Artifact storage type, in this case `azure`\n"
+        },
+        "expires": {
+          "type": "string",
+          "description": "Date-time after which the artifact should be deleted.\nNote, that these will be collected over time, and artifacts may\nremain available after expiration. Azure based artifacts are\nidentified in azure table storage and explicitly deleted in the\nazure storage container after expiration.\n",
+          "format": "date-time"
+        },
+        "contentType": {
+          "type": "string",
+          "description": "Artifact mime-type, when uploading artifact please use the same\n`Content-Type`, consistently using the correct mime-type make\ntooling a lot easier, specifically, always using `application/json`\nfor JSON artifacts.\n",
+          "maxLength": 255
+        }
+      }
+    },
+    {
+      "description": "Request the queue to redirect to a URL for a given artifact.\nThis allows you to reference artifacts that aren't managed by the queue.\nThe queue will still authenticate the request, so depending on the level\nof secrecy required, secret URLs **might** work. Note, this is mainly\nuseful for public artifacts, for example temporary files directly\nstored on the worker host and only available there for a specific\namount of time.\n",
+      "title": "Redirect Artifact Request",
+      "additionalProperties": false,
+      "required": [
+        "storageType",
+        "expires",
+        "url",
+        "contentType"
+      ],
+      "type": "object",
+      "properties": {
+        "storageType": {
+          "enum": [
+            "reference"
+          ],
+          "type": "string",
+          "description": "Artifact storage type, in this case `reference`\n"
+        },
+        "url": {
+          "type": "string",
+          "description": "URL to which the queue should redirect using a `303` (See other)\nredirect.\n",
+          "format": "uri"
+        },
+        "expires": {
+          "type": "string",
+          "description": "Date-time after which the queue should no longer redirect to this URL.\nNote, that the queue will and cannot delete the resource your URL\nreferences, you are responsible for doing that yourself.\n",
+          "format": "date-time"
+        },
+        "contentType": {
+          "type": "string",
+          "description": "Artifact mime-type for the resource to which the queue should\nredirect. Please use the same `Content-Type`, consistently using\nthe correct mime-type make tooling a lot easier, specifically,\nalways using `application/json` for JSON artifacts.\n",
+          "maxLength": 255
+        }
+      }
+    },
+    {
+      "description": "Request the queue to reply `424` (Failed Dependency) with `reason` and \n`message` to any `GET` request for this artifact. This is mainly useful\nas a way for a task to declare that it failed to provide an artifact it\nwanted to upload.\n",
+      "title": "Error Artifact Request",
+      "additionalProperties": false,
+      "required": [
+        "storageType",
+        "expires",
+        "reason",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "storageType": {
+          "enum": [
+            "error"
+          ],
+          "type": "string",
+          "description": "Artifact storage type, in this case `error`\n"
+        },
+        "reason": {
+          "enum": [
+            "file-missing-on-worker",
+            "invalid-resource-on-worker",
+            "too-large-file-on-worker"
+          ],
+          "type": "string",
+          "description": "Reason why the artifact doesn't exist.\n"
+        },
+        "expires": {
+          "type": "string",
+          "description": "Date-time after which the queue should stop replying with the error\nand forget about the artifact.\n",
+          "format": "date-time"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human readable explanation of why the artifact is missing\n",
+          "maxLength": 4096
+        }
+      }
+    }
+  ],
+  "description": "Request a authorization to put and artifact or posting of a URL as an artifact. Note that the `storageType` property is referenced in the response as well."
+}
