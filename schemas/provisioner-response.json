@@ -1,0 +1,54 @@
+{
+  "description": "Response containing information about a provisioner.\n",
+  "title": "Provisioner Response",
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "required": [
+    "provisionerId",
+    "description",
+    "actions",
+    "stability",
+    "expires",
+    "lastDateActive"
+  ],
+  "type": "object",
+  "properties": {
+    "stability": {
+      "enum": [
+        "experimental",
+        "stable",
+        "deprecated"
+      ],
+      "type": "string",
+      "description": "This is the stability of the provisioner. Accepted values:\n  * `experimental`\n  * `stable`\n  * `deprecated`\n",
+      "title": "Stability"
+    },
+    "provisionerId": {
+      "minLength": 1,
+      "title": "Provisioner ID",
+      "type": "string",
+      "pattern": "^([a-zA-Z0-9-_]*)$",
+      "maxLength": 22
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the provisioner.\n",
+      "title": "Description"
+    },
+    "expires": {
+      "title": "Provisioner Expiration",
+      "type": "string",
+      "description": "Date and time after which the provisioner will be automatically\ndeleted by the queue.\n",
+      "format": "date-time"
+    },
+    "lastDateActive": {
+      "title": "Provisioner Last Date Active",
+      "type": "string",
+      "description": "Date of the last time this provisioner was seen active. `lastDateActive` is updated every 6 hours\nbut may be off by up-to 6 hours. Nonetheless, `lastDateActive` is a good indicator\nof when the provisioner was last seen active.\n",
+      "format": "date-time"
+    },
+    "actions": {
+      "$ref": "actions.json#"
+    }
+  }
+}

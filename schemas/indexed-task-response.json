@@ -1,0 +1,44 @@
+{
+  "description": "Representation of an indexed task.\n",
+  "title": "Indexed Task Response",
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "required": [
+    "namespace",
+    "taskId",
+    "rank",
+    "data",
+    "expires"
+  ],
+  "type": "object",
+  "properties": {
+    "namespace": {
+      "title": "Namespace",
+      "type": "string",
+      "description": "Namespace of the indexed task, used to find the indexed task in the index.\n",
+      "maxLength": 255
+    },
+    "expires": {
+      "title": "Expiration",
+      "type": "string",
+      "description": "Date at which this entry expires from the task index.\n",
+      "format": "date-time"
+    },
+    "data": {
+      "type": "object",
+      "description": "Data that was reported with the task. This is an arbitrary JSON object.\n",
+      "title": "Task Specific Data"
+    },
+    "taskId": {
+      "pattern": "^[A-Za-z0-9_-]{8}[Q-T][A-Za-z0-9_-][CGKOSWaeimquy26-][A-Za-z0-9_-]{10}[AQgw]$",
+      "type": "string",
+      "description": "Unique task identifier, this is UUID encoded as\n[URL-safe base64](http://tools.ietf.org/html/rfc4648#section-5) and\nstripped of `=` padding.\n",
+      "title": "Task Identifier"
+    },
+    "rank": {
+      "type": "number",
+      "description": "If multiple tasks are indexed with the same `namespace` the task with the\nhighest `rank` will be stored and returned in later requests. If two tasks\nhas the same `rank` the latest task will be stored.\n",
+      "title": "Rank"
+    }
+  }
+}
