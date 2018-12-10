@@ -9,33 +9,43 @@
 React Schema Viewer takes a schema as input and uses it to generate comprehensible views.
 It has full support for Joi and JSON schema (version 3 and 4).
 
-## SchemaViewer
+## SchemaTable
 
 ### Props
 | Property                | Type                       | Required? | Description                                                                                       |
 |-------------------------|----------------------------|-----------|---------------------------------------------------------------------------------------------------|
-| `schema`                | Object                     | ✓         | Schema object representation in one the supported schema types.                                   |
-| `type`                  | enumerated: 'json' &#124; 'joi' | -         | Object schema validation type. Default: 'json'.                                                   |
+| `schema`                | Object                     | ✓         | A JSON schema object.                                                                             |
 | `headerBackgroundColor` | string                     | -         | The header background color given that a schema title is provided. Default: 'rgb(245, 245, 245)'. |
-| `maxHeight`             | string                     | -         | Max height of the panel. Default: '100%'.                                                          |
+| `maxHeight`             | string                     | -         | Max height of the panel. Default: '100%'.                                                         |
+
+## JoiSchemaViewer
+
+### Props
+| Property                | Type                       | Required? | Description                                                                                       |
+|-------------------------|----------------------------|-----------|---------------------------------------------------------------------------------------------------|
+| `schema`                | Object                     | ✓         | A Joi schema object.                                                                              |
+| `headerBackgroundColor` | string                     | -         | The header background color given that a schema title is provided. Default: 'rgb(245, 245, 245)'. |
+| `maxHeight`             | string                     | -         | Max height of the panel. Default: '100%'.                                                         |
 
 ### Usage
 
 react-schema-viewer is an ES-compatible module, so it can be imported as expected. If you want to use it with CJS require, you'll need to use the .default property to access the default exports:
 
+_Example: Importing SchemaTable_
+
 ```js
 // CJS require
-const SchemaViewer = require('react-schema-viewer').default;
+const SchemaTable = require('react-schema-viewer/SchemaTable').default;
 
 // ES module
-import SchemaViewer from 'react-schema-viewer';
+import SchemaTable from 'react-schema-viewer/SchemaTable';
 ```
 
 _Example: Rendering a JSON schema:_
 ```js
 import React from 'react';
 import { render } from 'react-dom';
-import SchemaViewer from 'react-schema-viewer';
+import SchemaTable from 'react-schema-viewer/SchemaTable';
 
 const jsonSchema = {
   'title': 'Person',
@@ -57,7 +67,7 @@ const jsonSchema = {
 };
 
 render((
-  <SchemaViewer schema={jsonSchema} />
+  <SchemaTable schema={jsonSchema} />
 ), document.getElementById('root'));
 ````
 
@@ -69,7 +79,7 @@ _Example: Rendering a Joi object schema:_
 ```js
 import React from 'react';
 import { render } from 'react-dom';
-import SchemaViewer from 'react-schema-viewer';
+import JoiSchemaTable from 'react-schema-viewer/JoiSchemaTable';
 
 joi.object({
   firstName: joi.string().required(),
@@ -78,7 +88,7 @@ joi.object({
 }).label('Person');
 
 render((
-  <SchemaViewer type="joi" schema={joiSchema} />
+  <JoiSchemaTable schema={joiSchema} />
 ), document.getElementById('root'));
 ````
 

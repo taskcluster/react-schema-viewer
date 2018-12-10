@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Stories, Story, Props } from 'neutrino-preset-react-components/lib';
 import SchemaTable from './components/SchemaTable';
+import JoiSchemaTable from './components/JoiSchemaTable';
 import joi from 'joi-browser';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -28,12 +29,14 @@ const load = async () => {
       <AppContainer>
         <Stories>
           <Story component={SchemaTable} >
-            <Props name="Joi example" type='joi' schema={joiSchema} />
             <Props name="Task Definition" schema={taskDef} />
             <Props name="Hook Status" headerBackgroundColor={'rgba(73, 204, 144, 0.1)'} schema={hookStatus} />
             <Props name="Extra Properties" schema={otherProps} />
             <Props name="One of" schema={oneOf} />
             <Props name="Index Response" schema={indexedTask} />
+          </Story>
+          <Story component={JoiSchemaTable} >
+            <Props name="Joi example" schema={joiSchema} />
           </Story>
         </Stories>
       </AppContainer>
@@ -42,7 +45,7 @@ const load = async () => {
 };
 
 if (module.hot) {
-  module.hot.accept('./components/SchemaTable', load);
+  module.hot.accept(['./components/SchemaTable', './components/JoiSchemaTable'], load);
 }
 
 load();

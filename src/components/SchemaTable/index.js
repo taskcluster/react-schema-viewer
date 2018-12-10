@@ -1,9 +1,8 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import { object, bool, oneOf, string } from 'prop-types';
-import joiToJson from 'joi-to-json-schema';
 import Container from '../../widgets/Container';
-import NormalRow from './NormalRow';
+import NormalRow from '../../common/NormalRow';
 import styles from './styles.css';
 
 export default class SchemaTable extends React.PureComponent {
@@ -132,9 +131,7 @@ export default class SchemaTable extends React.PureComponent {
   }
 
   render() {
-    const schema = this.props.type === 'joi' ?
-      joiToJson(this.props.schema) :
-      this.props.schema;
+    const { schema } = this.props;
 
     return (
       <Container
