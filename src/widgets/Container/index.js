@@ -9,8 +9,8 @@ export default class Container extends React.PureComponent {
     return (
       <div style={{ backgroundColor }} className={styles.headerContainer}>
         <h4 className={styles.title}>
-          {schema.title}&nbsp;{schema.id && (
-          <a className={styles.source} href={schema.id} target='_blank' rel='noopener noreferrer'>
+          {schema.title}&nbsp;{schema.$id ? schema.$id : schema.id && (
+          <a className={styles.source} href={schema.$id ? schema.$id : schema.id} target='_blank' rel='noopener noreferrer'>
             (source)
           </a>
         )}

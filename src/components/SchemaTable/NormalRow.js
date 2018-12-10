@@ -29,7 +29,7 @@ export default class NormalRow extends React.PureComponent {
       return (
         <ul className={styles.list}>
           {schema.enum.map(val => (
-            <li key={`${schema.id}-${val}`}>
+            <li key={`${schema.$id ? schema.$id : schema.id}-${val}`}>
               <CodeTooltip pattern={val} />
             </li>
           ))}

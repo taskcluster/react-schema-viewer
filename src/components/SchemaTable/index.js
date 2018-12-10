@@ -144,7 +144,7 @@ export default class SchemaTable extends React.PureComponent {
         <Table
           responsive
           className={styles.parentTable}>
-          {this.schemaTable(schema, null, null, schema.id)}
+          {this.schemaTable(schema, null, null, schema.$id ? schema.$id : schema.id)}
         </Table>
       </Container>
     );
