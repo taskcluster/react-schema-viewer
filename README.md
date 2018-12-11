@@ -18,7 +18,7 @@ It has full support for Joi and JSON schema (version 3 and 4).
 | `headerBackgroundColor` | string                     | -         | The header background color given that a schema title is provided. Default: 'rgb(245, 245, 245)'. |
 | `maxHeight`             | string                     | -         | Max height of the panel. Default: '100%'.                                                         |
 
-## JoiSchemaViewer
+## JoiSchemaTable
 
 ### Props
 | Property                | Type                       | Required? | Description                                                                                       |
