@@ -83,7 +83,6 @@ export default class SchemaTable extends React.PureComponent {
   }
 
   schemaTable(schema, name, reqSet, key) {
-
     reqSet = new Set(schema.required || reqSet || []);
     key = `${key}-${name}`;
 
@@ -138,8 +137,7 @@ export default class SchemaTable extends React.PureComponent {
       <Container
         backgroundColor={this.props.headerBackgroundColor}
         maxHeight={this.props.maxHeight}
-        schema={schema}
-        onClick={this.handleOnClick}>
+        schema={schema}>
         <Table
           responsive
           className={styles.parentTable}>
