@@ -6,6 +6,24 @@ import NormalRow from '../../common/NormalRow';
 import styles from './styles.css';
 
 export default class SchemaTable extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      jsonView: false
+    }
+
+    this.handleOnClick = this.handleOnClick.bind(this);
+  }
+
+  handleOnClick(event) {
+    if (event) {
+      this.setState({
+        jsonView: !this.state.jsonView
+      })
+    }
+  }
+
   static propTypes = {
     schema: object.isRequired,
     headerBackgroundColor: string,
@@ -83,6 +101,7 @@ export default class SchemaTable extends React.PureComponent {
   }
 
   schemaTable(schema, name, reqSet, key) {
+
     reqSet = new Set(schema.required || reqSet || []);
     key = `${key}-${name}`;
 
@@ -137,12 +156,20 @@ export default class SchemaTable extends React.PureComponent {
       <Container
         backgroundColor={this.props.headerBackgroundColor}
         maxHeight={this.props.maxHeight}
-        schema={schema}>
-        <Table
-          responsive
-          className={styles.parentTable}>
-          {this.schemaTable(schema, null, null, schema.$id ? schema.$id : schema.id)}
-        </Table>
+        schema={schema}
+        jsonView={this.state.jsonView}
+        onClick={this.handleOnClick}>
+        {this.state.jsonView ? (
+          <pre>
+            {JSON.stringify(schema, undefined, 2)}
+          </pre>
+        ) : (
+          <Table
+            responsive
+            className={styles.parentTable}>
+            {this.schemaTable(schema, null, null, schema.$id ? schema.$id : schema.id)}
+          </Table>
+        )}
       </Container>
     );
   }

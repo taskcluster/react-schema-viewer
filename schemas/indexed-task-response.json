@@ -3,6 +3,7 @@
   "title": "Indexed Task Response",
   "additionalProperties": false,
   "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "https://tc.example.com/schemas/index/v1/tsak-response.json#",
   "required": [
     "namespace",
     "taskId",
