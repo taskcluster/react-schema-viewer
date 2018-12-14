@@ -3,25 +3,22 @@ import Markdown from '../Markdown';
 import styles from './styles.css';
 
 export default class Container extends React.PureComponent {
+  constructor(props) {
+    super(props);
 
-  getViewSource(schema) {
-    if (schema.$id) {
-      return (
-        <a className={styles.source} onClick={this.props.onClick}>
-          {`(${this.props.jsonView ? 'hide' : 'show'} source)`}
-        </a>
-      );
+    this.state = {
+      jsonView: false
     }
 
-    if (schema.id) {
-      return (
-        <a className={styles.source} href={schema.$id ? schema.$id : schema.id} target='_blank' rel='noopener noreferrer'>
-          (view source)
-        </a>
-      );
-    }
+    this.handleOnClick = this.handleOnClick.bind(this);
+  }
 
-    return
+  handleOnClick(event) {
+    if (event) {
+      this.setState({
+        jsonView: !this.state.jsonView
+      })
+    }
   }
 
   renderHeader = () => {
@@ -29,7 +26,11 @@ export default class Container extends React.PureComponent {
     return (
       <div style={{ backgroundColor }} className={styles.headerContainer}>
         <h4 className={styles.title}>
-          {schema.title}&nbsp;{this.getViewSource(schema)}
+          {schema.title}&nbsp;{(
+            <a className={styles.source} onClick={this.handleOnClick}>
+              {`(${this.state.jsonView ? 'hide' : 'show'} source)`}
+            </a>
+          )}
         </h4>
         <Markdown>{schema.description}</Markdown>
       </div>
@@ -45,7 +46,11 @@ export default class Container extends React.PureComponent {
           {schema.title && this.renderHeader()}
         </div>
         <div>
-          {this.props.children}
+          {!this.state.jsonView ? this.props.children : (
+            <pre>
+              {JSON.stringify(schema, undefined, 2)}
+            </pre>
+          )}
         </div>
       </div>
     );
