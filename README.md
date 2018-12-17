@@ -35,17 +35,17 @@ _Example: Importing SchemaTable_
 
 ```js
 // CJS require
-const SchemaTable = require('react-schema-viewer/SchemaTable').default;
+const SchemaTable = require('react-schema-viewer/lib/SchemaTable').default;
 
 // ES module
-import SchemaTable from 'react-schema-viewer/SchemaTable';
+import SchemaTable from 'react-schema-viewer/lib/SchemaTable';
 ```
 
 _Example: Rendering a JSON schema:_
 ```js
 import React from 'react';
 import { render } from 'react-dom';
-import SchemaTable from 'react-schema-viewer/SchemaTable';
+import SchemaTable from 'react-schema-viewer/lib/SchemaTable';
 
 const jsonSchema = {
   'title': 'Person',
@@ -79,7 +79,7 @@ _Example: Rendering a Joi object schema:_
 ```js
 import React from 'react';
 import { render } from 'react-dom';
-import JoiSchemaTable from 'react-schema-viewer/JoiSchemaTable';
+import JoiSchemaTable from 'react-schema-viewer/lib/JoiSchemaTable';
 
 joi.object({
   firstName: joi.string().required(),
