@@ -9,16 +9,12 @@ export default class Container extends React.PureComponent {
     this.state = {
       jsonView: false
     }
-
-    this.handleOnClick = this.handleOnClick.bind(this);
   }
 
-  handleOnClick(event) {
-    if (event) {
-      this.setState({
-        jsonView: !this.state.jsonView
-      })
-    }
+  handleViewToggle = () => {
+    this.setState({
+      jsonView: !this.state.jsonView
+    });
   }
 
   renderHeader = () => {
@@ -27,8 +23,8 @@ export default class Container extends React.PureComponent {
       <div style={{ backgroundColor }} className={styles.headerContainer}>
         <h4 className={styles.title}>
           {schema.title}&nbsp;{(
-            <a className={styles.source} onClick={this.handleOnClick}>
-              {`(${this.state.jsonView ? 'hide' : 'show'} source)`}
+            <a className={styles.source} onClick={this.handleViewToggle}>
+              {this.state.jsonView ? 'hide' : 'show'} source
             </a>
           )}
         </h4>
