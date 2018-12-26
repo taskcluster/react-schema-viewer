@@ -7,7 +7,8 @@
 ---
 
 React Schema Viewer takes a schema as input and uses it to generate comprehensible views.
-It has full support for Joi and JSON schema (version 3 and 4).
+It has full support for Joi and JSON schema (versions draft-06 and draft-07).
+This package requires React 16.
 
 ## SchemaTable
 
