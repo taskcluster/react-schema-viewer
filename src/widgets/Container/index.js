@@ -7,7 +7,8 @@ export default class Container extends React.PureComponent {
     super(props);
 
     this.state = {
-      jsonView: false
+      jsonView: false,
+      error: null,
     }
   }
 
@@ -17,29 +18,36 @@ export default class Container extends React.PureComponent {
     });
   }
 
-  renderHeader = () => {
-    const { schema, backgroundColor } = this.props;
-    return (
-      <div style={{ backgroundColor }} className={styles.headerContainer}>
-        <h4 className={styles.title}>
-          {schema.title}&nbsp;{(
-            <a className={styles.source} onClick={this.handleViewToggle}>
-              {this.state.jsonView ? 'hide' : 'show'} source
-            </a>
-          )}
-        </h4>
-        <Markdown>{schema.description}</Markdown>
-      </div>
-    );
-  };
+  static getDerivedStateFromError(error) {
+    return {error};
+  }
 
   render() {
-    const { maxHeight, schema } = this.props;
+    const { maxHeight, schema, backgroundColor } = this.props;
+    const { error } = this.state;
+
+    if (error) {
+      return (
+        <div style={{ maxHeight }} className={styles.container}>
+          <h4>Error Rendering Schema</h4>
+          An error occurred rendering this schema:
+          <pre>{error.toString()}</pre>
+          Here is the content of the schema, as JSON:
+          <pre>{JSON.stringify(schema, null, 2)}</pre>
+        </div>
+      );
+    }
 
     return (
       <div style={{ maxHeight }} className={styles.container}>
-        <div>
-          {schema.title && this.renderHeader()}
+        <div style={{ backgroundColor }} className={styles.headerContainer}>
+          <h4 className={styles.title}>
+            {schema.title || 'JSON Schema'}&nbsp;{(
+              <a className={styles.source} onClick={this.handleViewToggle}>
+                {this.state.jsonView ? 'hide' : 'show'} source
+              </a>
+            )}
+          </h4>
         </div>
         <div>
           {!this.state.jsonView ? this.props.children : (

@@ -8,6 +8,54 @@ import joi from 'joi-browser';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const root = document.getElementById('root');
+const simple = {
+  type: 'object',
+  properties: {
+    mystring: {
+      type: "string",
+      title: "My string",
+      description: "This is my string.",
+      default: "foo"
+		},
+    aNumber: {
+      anyOf: [
+        {
+          description: "Literal number",
+          type: "number",
+          minimum: 13,
+          maximum: 133,
+        }, {
+          description: "String representation",
+          type: "string",
+        }, {
+          description: "Exponential notation",
+          properties: {
+            exp: {type: 'number'},
+            mant: {type: 'number'},
+          }
+        }
+      ],
+		},
+    bits: {
+      type: 'array',
+      title: 'Bitstring',
+      minItems: 7,
+      uniqueItems: true,
+      items: {
+        anyOf: [
+          {
+            type: "boolean",
+            description: "Boolean bit -- True = 1, False = 0.",
+          }, {
+            type: "number",
+            description: "Numeric bit",
+            enum: [0, 1],
+          }
+        ]
+      }
+    }
+  }
+};
 
 const load = async () => {
   const hookStatus = require('../schemas/hook-status.json');
@@ -29,6 +77,7 @@ const load = async () => {
       <AppContainer>
         <Stories>
           <Story component={SchemaTable} >
+            <Props name="Simple" schema={simple} />
             <Props name="Task Definition" schema={taskDef} />
             <Props name="Hook Status" headerBackgroundColor={'rgba(73, 204, 144, 0.1)'} schema={hookStatus} />
             <Props name="Extra Properties" schema={otherProps} />
