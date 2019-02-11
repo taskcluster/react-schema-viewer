@@ -15,7 +15,7 @@ export default class Container extends React.PureComponent {
     this.setState({
       jsonView: !this.state.jsonView
     });
-  }
+  };
 
   renderHeader = () => {
     const { schema, backgroundColor } = this.props;
@@ -43,8 +43,8 @@ export default class Container extends React.PureComponent {
         </div>
         <div>
           {!this.state.jsonView ? this.props.children : (
-            <pre>
-              {JSON.stringify(schema, undefined, 2)}
+            <pre className={styles.preJsonView}>
+              <code>{JSON.stringify(schema, undefined, 2)}</code>
             </pre>
           )}
         </div>
