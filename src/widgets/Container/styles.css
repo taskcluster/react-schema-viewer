@@ -13,3 +13,7 @@
 .source {
   font-size: 0.7em;
 }
+
+.preJsonView code {
+  white-space: inherit;
+}
