@@ -115,7 +115,11 @@ export default class SchemaTable extends React.PureComponent {
 
     switch (schema.type) {
       case 'object': return renderObject();
-      case 'array': return renderArray();
+      case 'array': {
+        if (schema.items) {
+          return renderArray();
+        }
+      }
       case undefined:
         if (schema.properties) {
           return renderObject();
