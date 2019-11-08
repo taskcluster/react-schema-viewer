@@ -9,4 +9,5 @@
 
 .popover {
   max-width: 90vw;
+  position: absolute;
 }
