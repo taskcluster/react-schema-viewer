@@ -10,4 +10,5 @@
 .popover {
   max-width: 90vw;
   position: absolute;
+  z-index: 1500;
 }
