@@ -1,3 +1,7 @@
+📣 This library is no longer maintained. Please use [material-ui-json-schema-viewer](https://github.com/taskcluster/material-ui-json-schema-viewer/) instead.
+
+---
+
 # react-schema-viewer
 
 <p align="center">
